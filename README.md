@@ -2,7 +2,7 @@
 
 A simple App to track your progress in gym!
 
-![app picture](app/for_git/main.png)
+<img src="app/for_git/main.png" alt="app picture" style="width:100px;"/>
 
 Add and update new excercises to your list and data will be stored automaticly
 

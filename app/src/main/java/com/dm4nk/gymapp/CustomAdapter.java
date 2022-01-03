@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -24,6 +26,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     private final ArrayList<String> reps;
     private final ArrayList<String> weight;
     private final ArrayList<String> date;
+
+    private Animation translate_anim;
 
     public CustomAdapter(Activity activity, Context context, ArrayList<String> id, ArrayList<String> name, ArrayList<String> times, ArrayList<String> reps, ArrayList<String> weight, ArrayList<String> date) {
         this.activity = activity;
@@ -46,7 +50,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
-        //holder.id.setText(String.valueOf(id.get(position)));
         holder.name.setText(String.valueOf(name.get(position)));
         holder.times.setText(String.valueOf(times.get(position)));
         holder.reps.setText(String.valueOf(reps.get(position)));
@@ -69,20 +72,21 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         return id.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView name, times, reps, weight, date;
         //todo: Linear layout
-        ConstraintLayout mainLayout;
+        LinearLayout mainLayout;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            //id = itemView.findViewById(R.id.id);
             name = itemView.findViewById(R.id.name);
             times = itemView.findViewById(R.id.times);
             reps = itemView.findViewById(R.id.reps);
             weight = itemView.findViewById(R.id.weight);
             date = itemView.findViewById(R.id.date);
             mainLayout = itemView.findViewById(R.id.mainLayout);
+            translate_anim = AnimationUtils.loadAnimation(context, R.anim.translate_anim);
+            mainLayout.setAnimation(translate_anim);
         }
     }
 }

@@ -3,7 +3,6 @@ package com.dm4nk.gymapp;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -58,20 +57,17 @@ public class UpdateActivity extends AppCompatActivity {
                     new_sets.equals(sets) &&
                     new_reps.equals(reps) &&
                     new_weight.equals(weight) &&
-                    new_url.equals(url))
-            {
+                    new_url.equals(url)) {
                 Toast.makeText(this, "Nothing changed", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            if(new_name.equals(name) &&
+            if (new_name.equals(name) &&
                     new_sets.equals(sets) &&
                     new_reps.equals(reps) &&
-                    new_weight.equals(weight))
-            {
+                    new_weight.equals(weight)) {
                 date = null;
-            }
-            else {
+            } else {
                 date = Calendar.getInstance().getTimeInMillis();
             }
 
@@ -106,10 +102,9 @@ public class UpdateActivity extends AppCompatActivity {
         });
 
         you_tube_image.setOnClickListener(v -> {
-            if(url.equals("")){
+            if (url.equals("")) {
                 Toast.makeText(this, "No YouTube URL", Toast.LENGTH_SHORT).show();
-            }
-            else {
+            } else {
                 Uri uri = Uri.parse(url);
                 startActivity(new Intent(Intent.ACTION_VIEW, uri));
             }

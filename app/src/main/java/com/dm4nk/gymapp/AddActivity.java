@@ -9,8 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.dm4nk.gymapp.domain.Exercise;
 
-import java.util.Locale;
-
 public class AddActivity extends AppCompatActivity {
 
     EditText name_input, sets_input, reps_input, weight_input, url_input;
@@ -45,7 +43,6 @@ public class AddActivity extends AppCompatActivity {
                 Toast.makeText(this, "Wrong times format", Toast.LENGTH_SHORT).show();
                 return;
             }
-
 
 
             myDB.addExercise(

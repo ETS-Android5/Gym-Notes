@@ -1,7 +1,5 @@
 package com.dm4nk.gymapp.domain;
 
-import java.util.Calendar;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

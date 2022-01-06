@@ -6,11 +6,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import androidx.appcompat.widget.SearchView;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +19,8 @@ import com.dm4nk.gymapp.domain.Exercise;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton add_button;
 
     private DatabaseHelper myDB;
-    private ArrayList<Exercise> exerciseArrayList = new ArrayList<>();
+    private final ArrayList<Exercise> exerciseArrayList = new ArrayList<>();
 
     private CustomAdapter customAdapter;
 
@@ -94,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                                 .reps(cursor.getInt(3))
                                 .weight(cursor.getString(4))
                                 .date(cursor.getLong(5))
+                                .url(cursor.getString(6))
                                 .build()
                 );
             }

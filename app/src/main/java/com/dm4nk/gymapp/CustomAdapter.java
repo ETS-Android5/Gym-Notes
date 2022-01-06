@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.LinearLayout;
@@ -25,16 +23,41 @@ import java.util.Locale;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> implements Filterable {
 
+    public static final SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
     private final Context context;
     private final Activity activity;
     private final List<Exercise> exerciseList;
     private final List<Exercise> exerciseListFull;
+    private final Filter customFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Exercise> filteredList = new ArrayList<>();
 
-    private Animation translate_anim;
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(exerciseListFull);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase(Locale.ROOT).trim();
 
-    public static final SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
+                for (Exercise e : exerciseListFull) {
+                    if (e.getName().toLowerCase(Locale.ROOT).contains(filterPattern)) {
+                        filteredList.add(e);
+                    }
+                }
+            }
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filteredList;
+            return filterResults;
+        }
 
-    public CustomAdapter(Activity activity, Context context, List<Exercise> exerciseList){
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            exerciseList.clear();
+            exerciseList.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
+
+    public CustomAdapter(Activity activity, Context context, List<Exercise> exerciseList) {
         this.activity = activity;
         this.context = context;
         this.exerciseList = exerciseList;
@@ -64,6 +87,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
             intent.putExtra("sets", String.valueOf(exerciseList.get(position).getSets()));
             intent.putExtra("reps", String.valueOf(exerciseList.get(position).getReps()));
             intent.putExtra("weight", String.valueOf(exerciseList.get(position).getWeight()));
+            intent.putExtra("url", String.valueOf(exerciseList.get(position).getUrl()));
             activity.startActivityForResult(intent, 1);
         });
     }
@@ -78,36 +102,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         return customFilter;
     }
 
-    private Filter customFilter = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-            List<Exercise> filteredList = new ArrayList<>();
-
-            if(constraint == null || constraint.length() == 0){
-                filteredList.addAll(exerciseListFull);
-            }
-            else {
-                String filterPattern = constraint.toString().toLowerCase(Locale.ROOT).trim();
-
-                for(Exercise e : exerciseListFull){
-                    if(e.getName().toLowerCase(Locale.ROOT).contains(filterPattern)){
-                        filteredList.add(e);
-                    }
-                }
-            }
-            FilterResults filterResults = new FilterResults();
-            filterResults.values = filteredList;
-            return filterResults;
-        }
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-            exerciseList.clear();
-            exerciseList.addAll((List) results.values);
-            notifyDataSetChanged();
-        }
-    };
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name, sets, reps, weight, date;
         //todo: Linear layout
@@ -121,8 +115,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
             weight = itemView.findViewById(R.id.weight);
             date = itemView.findViewById(R.id.date);
             mainLayout = itemView.findViewById(R.id.mainLayout);
-            //translate_anim = AnimationUtils.loadAnimation(context, R.anim.translate_anim);
-            //mainLayout.setAnimation(translate_anim);
         }
     }
 }

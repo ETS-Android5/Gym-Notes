@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Gym Notes</string>
+    <string name="you_tube_logo">you tube logo</string>
+    <string name="delete">Delete</string>
+    <string name="youtube">YouTube</string>
+    <string name="update">Update</string>
+    <string name="url">URL</string>
+    <string name="weight">Weight</string>
+    <string name="reps">Reps</string>
+    <string name="sets">Sets</string>
 </resources>

@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.dm4nk.gymapp.domain.Exercise;
+
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -22,6 +24,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_REPS = "reps";
     private static final String COLUMN_WEIGHT = "weight";
     private static final String COLUMN_DATE = "date";
+    private static final String COLUMN_URL = "url";
     private final Context context;
 
     DatabaseHelper(@Nullable Context context) {
@@ -37,7 +40,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_SETS + " INTEGER, " +
                 COLUMN_REPS + " INTEGER, " +
                 COLUMN_WEIGHT + " TEXT, " +
-                COLUMN_DATE + " INTEGER);";
+                COLUMN_DATE + " INTEGER, "+
+                COLUMN_URL + " TEXT DEFAULT '')";
         db.execSQL(query);
     }
 
@@ -47,17 +51,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void addExercise(String name, int times, int reps, String weight) {
+    public void addExercise(Exercise exercise) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(COLUMN_NAME, name.toLowerCase(Locale.ROOT));
-        cv.put(COLUMN_SETS, times);
-        cv.put(COLUMN_REPS, reps);
-        cv.put(COLUMN_WEIGHT, weight);
+        cv.put(COLUMN_NAME, exercise.getName().toLowerCase(Locale.ROOT));
+        cv.put(COLUMN_SETS, exercise.getSets());
+        cv.put(COLUMN_REPS, exercise.getReps());
+        cv.put(COLUMN_WEIGHT, exercise.getWeight().toLowerCase(Locale.ROOT));
         cv.put(COLUMN_DATE, Calendar.getInstance().getTimeInMillis());
+        cv.put(COLUMN_URL, exercise.getUrl().toLowerCase(Locale.ROOT));
 
         long result = db.insert(TABLE_NAME, null, cv);
+
         if (result == -1L) {
             Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
         } else {
@@ -80,17 +86,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    void updateData(String row_id, String name, int times, int reps, String weight) {
+    void updateData(Exercise exercise) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(COLUMN_NAME, name.toLowerCase(Locale.ROOT));
-        cv.put(COLUMN_SETS, times);
-        cv.put(COLUMN_REPS, reps);
-        cv.put(COLUMN_WEIGHT, weight);
-        cv.put(COLUMN_DATE, Calendar.getInstance().getTimeInMillis());
+        cv.put(COLUMN_NAME, exercise.getName().toLowerCase(Locale.ROOT));
+        cv.put(COLUMN_SETS, exercise.getSets());
+        cv.put(COLUMN_REPS, exercise.getReps());
+        cv.put(COLUMN_WEIGHT, exercise.getWeight().toLowerCase(Locale.ROOT));
+        long result;
+        if (exercise.getDate() != null) {
+            cv.put(COLUMN_DATE, exercise.getDate());
+        }
 
-        long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
+        cv.put(COLUMN_URL, exercise.getUrl().toLowerCase(Locale.ROOT));
+
+        result = db.update(TABLE_NAME, cv, "_id=?", new String[]{String.valueOf(exercise.getId())});
+
         if (result == -1) {
             Toast.makeText(context, "Failed to update", Toast.LENGTH_SHORT).show();
         } else {
@@ -108,7 +120,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public Cursor findByTemplateName(String name){
+    public Cursor findByTemplateName(String name) {
         String query = "SELECT * FROM " + TABLE_NAME
                 + " WHERE " + COLUMN_NAME + " LIKE " + "%" + name + "%"
                 + " ORDER BY "

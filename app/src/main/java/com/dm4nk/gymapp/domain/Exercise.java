@@ -1,5 +1,7 @@
 package com.dm4nk.gymapp.domain;
 
+import java.util.Calendar;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,4 +18,5 @@ public class Exercise {
     private Integer reps;
     private String weight;
     private Long date;
+    private String url;
 }

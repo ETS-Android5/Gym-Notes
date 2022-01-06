@@ -9,24 +9,22 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class MyDatabaseHelper extends SQLiteOpenHelper {
+public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "GymResults.db";
     private static final int DATABASE_VERSION = 1;
     private static final String TABLE_NAME = "my_gym_results";
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_NAME = "name";
-    private static final String COLUMN_TIMES = "times";
+    private static final String COLUMN_SETS = "sets";
     private static final String COLUMN_REPS = "reps";
     private static final String COLUMN_WEIGHT = "weight";
-    private static final String COLUMN_DATE = "time";
+    private static final String COLUMN_DATE = "date";
     private final Context context;
-    SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
 
-    MyDatabaseHelper(@Nullable Context context) {
+    DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
     }
@@ -36,10 +34,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         String query = "CREATE TABLE " + TABLE_NAME + " (" +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_NAME + " TEXT, " +
-                COLUMN_TIMES + " INTEGER, " +
+                COLUMN_SETS + " INTEGER, " +
                 COLUMN_REPS + " INTEGER, " +
                 COLUMN_WEIGHT + " TEXT, " +
-                COLUMN_DATE + " TEXT);";
+                COLUMN_DATE + " INTEGER);";
         db.execSQL(query);
     }
 
@@ -53,11 +51,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(COLUMN_NAME, name);
-        cv.put(COLUMN_TIMES, times);
+        cv.put(COLUMN_NAME, name.toLowerCase(Locale.ROOT));
+        cv.put(COLUMN_SETS, times);
         cv.put(COLUMN_REPS, reps);
         cv.put(COLUMN_WEIGHT, weight);
-        cv.put(COLUMN_DATE, format.format(Calendar.getInstance().getTime()));
+        cv.put(COLUMN_DATE, Calendar.getInstance().getTimeInMillis());
 
         long result = db.insert(TABLE_NAME, null, cv);
         if (result == -1L) {
@@ -67,10 +65,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    Cursor readAllData() {
+    public Cursor readAllData() {
         String query = "SELECT * FROM " + TABLE_NAME + " ORDER BY "
                 + COLUMN_NAME + " ASC, "
-                + COLUMN_TIMES + " ASC, "
+                + COLUMN_SETS + " ASC, "
                 + COLUMN_REPS + " ASC, "
                 + COLUMN_WEIGHT + " ASC";
         SQLiteDatabase db = this.getReadableDatabase();
@@ -86,11 +84,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(COLUMN_NAME, name);
-        cv.put(COLUMN_TIMES, times);
+        cv.put(COLUMN_NAME, name.toLowerCase(Locale.ROOT));
+        cv.put(COLUMN_SETS, times);
         cv.put(COLUMN_REPS, reps);
         cv.put(COLUMN_WEIGHT, weight);
-        cv.put(COLUMN_DATE, format.format(Calendar.getInstance().getTime()));
+        cv.put(COLUMN_DATE, Calendar.getInstance().getTimeInMillis());
 
         long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
         if (result == -1) {
@@ -110,7 +108,21 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    void DeleteAllData() {
+    public Cursor findByTemplateName(String name){
+        String query = "SELECT * FROM " + TABLE_NAME
+                + " WHERE " + COLUMN_NAME + " LIKE " + "%" + name + "%"
+                + " ORDER BY "
+                + COLUMN_NAME + " ASC, "
+                + COLUMN_SETS + " ASC, "
+                + COLUMN_REPS + " ASC, "
+                + COLUMN_WEIGHT + " ASC;";
 
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
     }
 }

@@ -11,9 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class UpdateActivity extends AppCompatActivity {
 
-    private EditText name_input2, times_input2, reps_input2, weight_input2;
+    private EditText name_input2, sets_input2, reps_input2, weight_input2;
     private Button update_button, delete_button;
-    private String id, name, times, reps, weight;
+    private String id, name, sets, reps, weight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class UpdateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_update);
 
         name_input2 = findViewById(R.id.name_input2);
-        times_input2 = findViewById(R.id.times_input2);
+        sets_input2 = findViewById(R.id.sets_input2);
         reps_input2 = findViewById(R.id.reps_input2);
         weight_input2 = findViewById(R.id.weight_input2);
         update_button = findViewById(R.id.update_button);
@@ -35,14 +35,14 @@ public class UpdateActivity extends AppCompatActivity {
         }
 
         update_button.setOnClickListener(view -> {
-            MyDatabaseHelper myDB = new MyDatabaseHelper(UpdateActivity.this);
+            DatabaseHelper myDB = new DatabaseHelper(UpdateActivity.this);
             String new_name = name_input2.getText().toString().trim();
-            String new_times = times_input2.getText().toString().trim();
+            String new_times = sets_input2.getText().toString().trim();
             String new_reps = reps_input2.getText().toString().trim();
             String new_weight = weight_input2.getText().toString().trim();
 
             if (new_name.equals(name) &&
-                    new_times.equals(times) &&
+                    new_times.equals(sets) &&
                     new_reps.equals(reps) &&
                     new_weight.equals(weight)) {
                 Toast.makeText(this, "Nothing changed", Toast.LENGTH_SHORT).show();
@@ -77,19 +77,19 @@ public class UpdateActivity extends AppCompatActivity {
     void getAndSetIntentData() {
         if (getIntent().hasExtra("id") &&
                 getIntent().hasExtra("name") &&
-                getIntent().hasExtra("times") &&
+                getIntent().hasExtra("sets") &&
                 getIntent().hasExtra("reps") &&
                 getIntent().hasExtra("weight")) {
             //getting data
             id = getIntent().getStringExtra("id");
             name = getIntent().getStringExtra("name");
-            times = getIntent().getStringExtra("times");
+            sets = getIntent().getStringExtra("sets");
             reps = getIntent().getStringExtra("reps");
             weight = getIntent().getStringExtra("weight");
 
             //setting data
             name_input2.setText(name);
-            times_input2.setText(times);
+            sets_input2.setText(sets);
             reps_input2.setText(reps);
             weight_input2.setText(weight);
         } else {
@@ -102,7 +102,7 @@ public class UpdateActivity extends AppCompatActivity {
         builder.setTitle("Delete " + name + " ?");
         builder.setMessage("Are you sure you want to delete " + name + " ?");
         builder.setPositiveButton("Yes", (dialogInterface, i) -> {
-            MyDatabaseHelper myDB = new MyDatabaseHelper(UpdateActivity.this);
+            DatabaseHelper myDB = new DatabaseHelper(UpdateActivity.this);
             myDB.deleteOneRow(id);
             finish();
         });

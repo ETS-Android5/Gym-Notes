@@ -3,6 +3,10 @@ package com.dm4nk.gymapp;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import androidx.appcompat.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -10,19 +14,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dm4nk.gymapp.domain.Exercise;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    RecyclerView recyclerView;
-    FloatingActionButton add_button;
+    private RecyclerView recyclerView;
+    private FloatingActionButton add_button;
 
-    MyDatabaseHelper myDB;
-    ArrayList<String> id, name, times, reps, weight, date;
+    private DatabaseHelper myDB;
+    private ArrayList<Exercise> exerciseArrayList = new ArrayList<>();
 
-    CustomAdapter customAdapter;
+    private CustomAdapter customAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,17 +41,11 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(intent, 1);
         });
 
-        myDB = new MyDatabaseHelper(MainActivity.this);
-        id = new ArrayList<>();
-        name = new ArrayList<>();
-        times = new ArrayList<>();
-        reps = new ArrayList<>();
-        weight = new ArrayList<>();
-        date = new ArrayList<>();
+        myDB = new DatabaseHelper(MainActivity.this);
 
         storeDataInArrays();
 
-        customAdapter = new CustomAdapter(MainActivity.this, this, id, name, times, reps, weight, date);
+        customAdapter = new CustomAdapter(MainActivity.this, this, exerciseArrayList);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
     }
@@ -59,18 +58,44 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                customAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        return true;
+    }
+
     public void storeDataInArrays() {
         Cursor cursor = myDB.readAllData();
         if (cursor.getCount() == 0) {
             Toast.makeText(this, "No Data", Toast.LENGTH_SHORT).show();
         } else {
             while (cursor.moveToNext()) {
-                id.add(cursor.getString(0));
-                name.add(cursor.getString(1));
-                times.add(cursor.getString(2));
-                reps.add(cursor.getString(3));
-                weight.add(cursor.getString(4));
-                date.add(cursor.getString(5));
+                exerciseArrayList.add(
+                        Exercise.builder()
+                                .id(cursor.getInt(0))
+                                .name(cursor.getString(1))
+                                .sets(cursor.getInt(2))
+                                .reps(cursor.getInt(3))
+                                .weight(cursor.getString(4))
+                                .date(cursor.getLong(5))
+                                .build()
+                );
             }
         }
     }

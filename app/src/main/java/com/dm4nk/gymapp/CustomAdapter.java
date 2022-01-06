@@ -8,85 +8,121 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.dm4nk.gymapp.domain.Exercise;
 
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> implements Filterable {
 
     private final Context context;
     private final Activity activity;
-    private final ArrayList<String> id;
-    private final ArrayList<String> name;
-    private final ArrayList<String> times;
-    private final ArrayList<String> reps;
-    private final ArrayList<String> weight;
-    private final ArrayList<String> date;
+    private final List<Exercise> exerciseList;
+    private final List<Exercise> exerciseListFull;
 
     private Animation translate_anim;
 
-    public CustomAdapter(Activity activity, Context context, ArrayList<String> id, ArrayList<String> name, ArrayList<String> times, ArrayList<String> reps, ArrayList<String> weight, ArrayList<String> date) {
+    public static final SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
+
+    public CustomAdapter(Activity activity, Context context, List<Exercise> exerciseList){
         this.activity = activity;
         this.context = context;
-        this.id = id;
-        this.name = name;
-        this.times = times;
-        this.reps = reps;
-        this.weight = weight;
-        this.date = date;
+        this.exerciseList = exerciseList;
+        this.exerciseListFull = new ArrayList<>(exerciseList);
     }
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.my_row, parent, false);
-        return new MyViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
-        holder.name.setText(String.valueOf(name.get(position)));
-        holder.times.setText(String.valueOf(times.get(position)));
-        holder.reps.setText(String.valueOf(reps.get(position)));
-        holder.weight.setText(String.valueOf(weight.get(position)));
-        holder.date.setText(String.valueOf(date.get(position)));
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+        holder.name.setText(String.valueOf(exerciseList.get(position).getName()));
+        holder.sets.setText(String.valueOf(exerciseList.get(position).getSets()));
+        holder.reps.setText(String.valueOf(exerciseList.get(position).getReps()));
+        holder.weight.setText(String.valueOf(exerciseList.get(position).getWeight()));
+        holder.date.setText(String.valueOf(format.format(exerciseList.get(position).getDate())));
 
         holder.mainLayout.setOnClickListener(view -> {
             Intent intent = new Intent(context, UpdateActivity.class);
-            intent.putExtra("id", String.valueOf(id.get(position)));
-            intent.putExtra("name", String.valueOf(name.get(position)));
-            intent.putExtra("times", String.valueOf(times.get(position)));
-            intent.putExtra("reps", String.valueOf(reps.get(position)));
-            intent.putExtra("weight", String.valueOf(weight.get(position)));
+            intent.putExtra("id", String.valueOf(exerciseList.get(position).getId()));
+            intent.putExtra("name", String.valueOf(exerciseList.get(position).getName()));
+            intent.putExtra("sets", String.valueOf(exerciseList.get(position).getSets()));
+            intent.putExtra("reps", String.valueOf(exerciseList.get(position).getReps()));
+            intent.putExtra("weight", String.valueOf(exerciseList.get(position).getWeight()));
             activity.startActivityForResult(intent, 1);
         });
     }
 
     @Override
     public int getItemCount() {
-        return id.size();
+        return exerciseList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView name, times, reps, weight, date;
+    @Override
+    public Filter getFilter() {
+        return customFilter;
+    }
+
+    private Filter customFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Exercise> filteredList = new ArrayList<>();
+
+            if(constraint == null || constraint.length() == 0){
+                filteredList.addAll(exerciseListFull);
+            }
+            else {
+                String filterPattern = constraint.toString().toLowerCase(Locale.ROOT).trim();
+
+                for(Exercise e : exerciseListFull){
+                    if(e.getName().toLowerCase(Locale.ROOT).contains(filterPattern)){
+                        filteredList.add(e);
+                    }
+                }
+            }
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filteredList;
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            exerciseList.clear();
+            exerciseList.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView name, sets, reps, weight, date;
         //todo: Linear layout
         LinearLayout mainLayout;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.name);
-            times = itemView.findViewById(R.id.times);
+            sets = itemView.findViewById(R.id.times);
             reps = itemView.findViewById(R.id.reps);
             weight = itemView.findViewById(R.id.weight);
             date = itemView.findViewById(R.id.date);
             mainLayout = itemView.findViewById(R.id.mainLayout);
-            translate_anim = AnimationUtils.loadAnimation(context, R.anim.translate_anim);
-            mainLayout.setAnimation(translate_anim);
+            //translate_anim = AnimationUtils.loadAnimation(context, R.anim.translate_anim);
+            //mainLayout.setAnimation(translate_anim);
         }
     }
 }

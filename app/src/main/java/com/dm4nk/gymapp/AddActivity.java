@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class AddActivity extends AppCompatActivity {
 
-    EditText name_input, times_input, reps_input, weight_input;
+    EditText name_input, sets_input, reps_input, weight_input;
     Button add_button;
 
     @Override
@@ -18,18 +18,18 @@ public class AddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add);
 
         name_input = findViewById(R.id.name_input);
-        times_input = findViewById(R.id.times_input);
+        sets_input = findViewById(R.id.sets_input);
         reps_input = findViewById(R.id.reps_input);
         weight_input = findViewById(R.id.weight_input);
         add_button = findViewById(R.id.add_button);
 
         add_button.setOnClickListener(view -> {
-            MyDatabaseHelper myDB = new MyDatabaseHelper(AddActivity.this);
+            DatabaseHelper myDB = new DatabaseHelper(AddActivity.this);
             int times;
             int reps;
 
             try {
-                times = Integer.parseInt(times_input.getText().toString().trim());
+                times = Integer.parseInt(sets_input.getText().toString().trim());
             } catch (NumberFormatException e) {
                 Toast.makeText(this, "Wrong times format", Toast.LENGTH_SHORT).show();
                 return;

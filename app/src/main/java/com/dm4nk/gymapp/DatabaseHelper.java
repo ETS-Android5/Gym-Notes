@@ -60,7 +60,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_REPS, exercise.getReps());
         cv.put(COLUMN_WEIGHT, exercise.getWeight().toLowerCase(Locale.ROOT));
         cv.put(COLUMN_DATE, Calendar.getInstance().getTimeInMillis());
-        cv.put(COLUMN_URL, exercise.getUrl().toLowerCase(Locale.ROOT));
+        cv.put(COLUMN_URL, exercise.getUrl());
 
         long result = db.insert(TABLE_NAME, null, cv);
 
@@ -99,7 +99,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cv.put(COLUMN_DATE, exercise.getDate());
         }
 
-        cv.put(COLUMN_URL, exercise.getUrl().toLowerCase(Locale.ROOT));
+        cv.put(COLUMN_URL, exercise.getUrl());
 
         result = db.update(TABLE_NAME, cv, "_id=?", new String[]{String.valueOf(exercise.getId())});
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Gym Notes</string>
+    <string name="you_tube_logo">you tube logo</string>
+    <string name="delete">Удалить</string>
+    <string name="youtube">YouTube</string>
+    <string name="update">Изменить</string>
+    <string name="url">URL</string>
+    <string name="weight">Вес</string>
+    <string name="reps">Повторов</string>
+    <string name="sets">Подходов</string>
+    <string name="button_to_add_new_exercise">button to add new exercise</string>
+    <string name="name">Название</string>
+    <string name="add">Добавить</string>
+    <string name="search">Search</string>
+    <string name="add_label">Добавить Упражнение</string>
+</resources>

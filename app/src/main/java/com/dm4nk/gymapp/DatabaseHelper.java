@@ -40,7 +40,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_SETS + " INTEGER, " +
                 COLUMN_REPS + " INTEGER, " +
                 COLUMN_WEIGHT + " TEXT, " +
-                COLUMN_DATE + " INTEGER, "+
+                COLUMN_DATE + " INTEGER, " +
                 COLUMN_URL + " TEXT DEFAULT '')";
         db.execSQL(query);
     }

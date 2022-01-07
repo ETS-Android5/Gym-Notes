@@ -110,7 +110,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.name);
-            sets = itemView.findViewById(R.id.times);
+            sets = itemView.findViewById(R.id.sets);
             reps = itemView.findViewById(R.id.reps);
             weight = itemView.findViewById(R.id.weight);
             date = itemView.findViewById(R.id.date);

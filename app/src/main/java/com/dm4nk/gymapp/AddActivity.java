@@ -5,11 +5,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dm4nk.gymapp.domain.Exercise;
-
-import java.util.Locale;
 
 public class AddActivity extends AppCompatActivity {
 
@@ -28,6 +27,11 @@ public class AddActivity extends AppCompatActivity {
         weight_input = findViewById(R.id.weight_input);
         add_button = findViewById(R.id.add_button);
 
+        ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            ab.setTitle(R.string.add_label);
+        }
+
         add_button.setOnClickListener(view -> {
             DatabaseHelper myDB = new DatabaseHelper(AddActivity.this);
             int sets;
@@ -45,7 +49,6 @@ public class AddActivity extends AppCompatActivity {
                 Toast.makeText(this, "Wrong times format", Toast.LENGTH_SHORT).show();
                 return;
             }
-
 
 
             myDB.addExercise(

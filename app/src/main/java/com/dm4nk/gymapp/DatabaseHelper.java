@@ -119,22 +119,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "Successfully deleted", Toast.LENGTH_SHORT).show();
         }
     }
-
-    public Cursor findByTemplateName(String name) {
-        String query = "SELECT * FROM " + TABLE_NAME
-                + " WHERE " + COLUMN_NAME + " LIKE " + "%" + name + "%"
-                + " ORDER BY "
-                + COLUMN_NAME + " ASC, "
-                + COLUMN_SETS + " ASC, "
-                + COLUMN_REPS + " ASC, "
-                + COLUMN_WEIGHT + " ASC;";
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = null;
-        if (db != null) {
-            cursor = db.rawQuery(query, null);
-        }
-        return cursor;
-    }
 }

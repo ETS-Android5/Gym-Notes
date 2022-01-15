@@ -3,6 +3,8 @@ package com.dm4nk.gymapp;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +20,10 @@ import com.dm4nk.gymapp.domain.Exercise;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> implements Filterable {
 
@@ -78,7 +82,21 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         holder.sets.setText(String.valueOf(exerciseList.get(position).getSets()));
         holder.reps.setText(String.valueOf(exerciseList.get(position).getReps()));
         holder.weight.setText(String.valueOf(exerciseList.get(position).getWeight()));
-        holder.date.setText(String.valueOf(format.format(exerciseList.get(position).getDate())));
+
+        Long date = exerciseList.get(position).getDate();
+        holder.date.setText(String.valueOf(format.format(date)));
+
+        long timeWithoutUpdates = Calendar.getInstance().getTimeInMillis() - date;
+
+        TimeUnit time = TimeUnit.DAYS;
+        long timeWithoutUpdatesInDays = time.convert(timeWithoutUpdates, TimeUnit.MILLISECONDS);
+
+        if(timeWithoutUpdatesInDays <= 30)
+            holder.date.setTextColor(Color.GREEN);
+        if(timeWithoutUpdatesInDays > 30 && timeWithoutUpdatesInDays <= 45)
+            holder.date.setTextColor(Color.YELLOW);
+        if(timeWithoutUpdatesInDays > 45)
+            holder.date.setTextColor(Color.RED);
 
         holder.mainLayout.setOnClickListener(view -> {
             Intent intent = new Intent(context, UpdateActivity.class);
@@ -104,7 +122,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name, sets, reps, weight, date;
-        //todo: Linear layout
         LinearLayout mainLayout;
 
         public ViewHolder(@NonNull View itemView) {

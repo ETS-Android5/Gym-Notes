@@ -3,7 +3,7 @@
 A simple App similar to notes to track your progress in gym!
 
 ## Installing Gym Notes on your phone
-1. Download application by clicking [here](https://downgit.github.io/#/home?url=https://github.com/dm4nk/GymApp/blob/master/app/release/app-release.apk)
+1. Download application by clicking [here](https://github.com/dm4nk/GymApp/blob/master/app/release/app-release.apk)
 2. Click on downloaded file
 3. (optional) Allow installation from this source
 4. Yes -> Yes -> ... -> finish
@@ -34,4 +34,4 @@ Track your weights and recheck videos
 
 <img src="https://user-images.githubusercontent.com/80630476/149655832-4532ee15-d646-4ffc-8ff1-288f75f7d22a.png" alt="update delete new exercise" style="width:200px;"/>
 
-Download app [here](https://downgit.github.io/#/home?url=https://github.com/dm4nk/GymApp/blob/master/app/release/app-release.apk)
+Download app [here](https://github.com/dm4nk/GymApp/blob/master/app/release/app-release.apk)

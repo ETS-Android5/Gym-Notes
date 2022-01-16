@@ -1,4 +1,4 @@
-# GymNotes
+# Gym-Notes
 
 A simple App similar to notes to track your progress in gym!
 

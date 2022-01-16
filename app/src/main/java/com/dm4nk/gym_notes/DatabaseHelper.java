@@ -1,4 +1,4 @@
-package com.dm4nk.gymapp;
+package com.dm4nk.gym_notes;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import com.dm4nk.gymapp.domain.Exercise;
+import com.dm4nk.gym_notes.domain.Exercise;
 
 import java.util.Calendar;
 import java.util.Locale;

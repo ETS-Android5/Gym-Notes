@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dm4nk.gymapp">
+    package="com.dm4nk.gym_notes">
 
     <application
         android:allowBackup="true"
@@ -10,16 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GymApp">
         <activity
-            android:name=".UpdateActivity"
+            android:name="com.dm4nk.gym_notes.UpdateActivity"
             android:exported="true"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName="com.dm4nk.gym_notes.MainActivity"/>
         <activity
-            android:name=".AddActivity"
+            android:name="com.dm4nk.gym_notes.AddActivity"
             android:exported="true"
             android:label="Add Exercise"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="com.dm4nk.gym_notes.MainActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.dm4nk.gym_notes.MainActivity"
             android:exported="true"
             android:label="Gym Notes">
             <intent-filter>

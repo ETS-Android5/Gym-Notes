@@ -1,4 +1,4 @@
-package com.dm4nk.gymapp;
+package com.dm4nk.gym_notes;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -14,7 +14,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.dm4nk.gymapp.domain.Exercise;
+import com.dm4nk.gym_notes.domain.Exercise;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.dm4nk.gymapp;
+package com.dm4nk.gym_notes;
 
 import org.junit.Test;
 

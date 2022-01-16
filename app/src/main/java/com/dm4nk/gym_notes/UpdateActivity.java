@@ -1,4 +1,4 @@
-package com.dm4nk.gymapp;
+package com.dm4nk.gym_notes;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -12,7 +12,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.dm4nk.gymapp.domain.Exercise;
+import com.dm4nk.gym_notes.domain.Exercise;
 
 import java.util.Calendar;
 

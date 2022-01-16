@@ -2,7 +2,7 @@
 
 A simple App similar to notes to track your progress in gym!
 
-## Installing Gym Notes on your phone
+## Installing Gym Notes on your Android device
 1. Download application by clicking [here](https://github.com/dm4nk/GymApp/blob/master/app/release/app-release.apk)
 2. Click on downloaded file
 3. (optional) Allow installation from this source

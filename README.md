@@ -10,12 +10,13 @@ A simple App similar to notes to track your progress in gym!
 
 ### Both dark and light theme available
 
-<img src="https://user-images.githubusercontent.com/80630476/149655748-f7b8be34-f5f3-458b-95f6-3685bba3f1a6.png" alt="main layout dark theme" style="width:200px;"/>
-<img src="https://user-images.githubusercontent.com/80630476/149655784-6e6eccf0-789a-4878-99a7-066a0930445d.png" alt="main layout light theme" style="width:200px;"/>
+<img src="https://user-images.githubusercontent.com/80630476/149655748-f7b8be34-f5f3-458b-95f6-3685bba3f1a6.png" alt="main layout dark theme" style="width:200px;"/><img src="https://user-images.githubusercontent.com/80630476/149655784-6e6eccf0-789a-4878-99a7-066a0930445d.png" alt="main layout light theme" style="width:200px;"/>
 
 ### Add exercises to your list and data will be stored automatically
 Color indication will help track weight progress. If you haven't changed weight for 30 days, date will turn YELLOW, and after 
 45 days date will turn RED. As you can see, I have only green dates as I'm a good sportsman.
+
+<img src="https://user-images.githubusercontent.com/80630476/149655811-3a79a36c-710e-4c52-abf7-1bc5672f24ba.png" alt="add new exercise" style="width:200px;"/>
 
 ### Search for exercises
 Search bar provided in right top corner

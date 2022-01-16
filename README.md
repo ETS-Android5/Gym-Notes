@@ -11,7 +11,7 @@ A simple App similar to notes to track your progress in gym!
 ### Both dark and light theme available
 It goes with english and russian language support, which will be applied automatically depending on your device language
 
-<img src="https://user-images.githubusercontent.com/80630476/149655748-f7b8be34-f5f3-458b-95f6-3685bba3f1a6.png" alt="main layout dark theme" style="width:200px;"/><img src="https://user-images.githubusercontent.com/80630476/149655784-6e6eccf0-789a-4878-99a7-066a0930445d.png" alt="main layout light theme" style="width:200px;"/>
+<img src="https://user-images.githubusercontent.com/80630476/149655748-f7b8be34-f5f3-458b-95f6-3685bba3f1a6.png" alt="main layout dark theme" style="width:200px;"/> <img src="https://user-images.githubusercontent.com/80630476/149655784-6e6eccf0-789a-4878-99a7-066a0930445d.png" alt="main layout light theme" style="width:200px;"/>
 
 ### Add exercises to your list and data will be stored automatically
 Color indication will help track weight progress. If you haven't changed weight for 30 days, date will turn YELLOW, and after 

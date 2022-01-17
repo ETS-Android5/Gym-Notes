@@ -17,21 +17,21 @@ It goes with english and russian language support, which will be applied automat
 Color indication will help track weight progress. If you haven't changed weight for 30 days, date will turn YELLOW, and after 
 45 days date will turn RED. As you can see, I have only green dates as I'm a good sportsman.
 
-<img src="https://user-images.githubusercontent.com/80630476/149655811-3a79a36c-710e-4c52-abf7-1bc5672f24ba.png" alt="add new exercise" style="width:200px;"/>
+<img src="https://user-images.githubusercontent.com/80630476/149655811-3a79a36c-710e-4c52-abf7-1bc5672f24ba.png" alt="add new exercise" style="width:250px;"/>
 
 ### Search for exercises
 Search bar provided in right top corner
 
-<img src="https://user-images.githubusercontent.com/80630476/149655801-ccfedcd3-23a9-450c-a713-646b1e1874b9.png" alt="search bar" style="width:200px;"/>
+<img src="https://user-images.githubusercontent.com/80630476/149655801-ccfedcd3-23a9-450c-a713-646b1e1874b9.png" alt="search bar" style="width:250px;"/>
 
 ### Add new exercises
 Also save useful videos and watch them later to remind yourself of technique
 
-<img src="https://user-images.githubusercontent.com/80630476/149655811-3a79a36c-710e-4c52-abf7-1bc5672f24ba.png" alt="add new exercise" style="width:200px;"/>
+<img src="https://user-images.githubusercontent.com/80630476/149655811-3a79a36c-710e-4c52-abf7-1bc5672f24ba.png" alt="add new exercise" style="width:250px;"/>
 
 ### Update exercise info
 Track your weights and recheck videos
 
-<img src="https://user-images.githubusercontent.com/80630476/149655832-4532ee15-d646-4ffc-8ff1-288f75f7d22a.png" alt="update delete new exercise" style="width:200px;"/>
+<img src="https://user-images.githubusercontent.com/80630476/149655832-4532ee15-d646-4ffc-8ff1-288f75f7d22a.png" alt="update delete new exercise" style="width:250px;"/>
 
 Download app [here](https://github.com/dm4nk/GymApp/blob/master/app/release/app-release.apk)

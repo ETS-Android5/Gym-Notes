@@ -90,11 +90,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         TimeUnit time = TimeUnit.DAYS;
         long timeWithoutUpdatesInDays = time.convert(timeWithoutUpdates, TimeUnit.MILLISECONDS);
 
-        if(timeWithoutUpdatesInDays <= 30)
+        if (timeWithoutUpdatesInDays <= 30)
             holder.date.setTextColor(Color.GREEN);
-        if(timeWithoutUpdatesInDays > 30 && timeWithoutUpdatesInDays <= 45)
+        if (timeWithoutUpdatesInDays > 30 && timeWithoutUpdatesInDays <= 45)
             holder.date.setTextColor(Color.YELLOW);
-        if(timeWithoutUpdatesInDays > 45)
+        if (timeWithoutUpdatesInDays > 45)
             holder.date.setTextColor(Color.RED);
 
         holder.mainLayout.setOnClickListener(view -> {

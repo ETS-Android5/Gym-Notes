@@ -1,33 +1,22 @@
 package com.dm4nk.gym_notes;
 
-import static java.security.AccessController.getContext;
-
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
-import android.os.ParcelFormatException;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
-import java.util.zip.Inflater;
 
 public class CalculatorActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -73,7 +62,7 @@ public class CalculatorActivity extends AppCompatActivity implements AdapterView
 
         PLATES_IMG = new ImageView[]{one, two, five, ten, fifteen, twenty, twenty_five, twenty_five2, twenty_five3, twenty_five4, twenty_five5, twenty_five6, twenty_five7};
 
-        scrollViewLinearlayout = (LinearLayout)findViewById(R.id.scroll_view_linear_layout);
+        scrollViewLinearlayout = (LinearLayout) findViewById(R.id.scroll_view_linear_layout);
 
         prepareImages();
 
@@ -122,8 +111,7 @@ public class CalculatorActivity extends AppCompatActivity implements AdapterView
             try {
                 double weight = Double.parseDouble(input_weight_calculator.getText().toString().trim());
                 calculate(PATHS[position], weight);
-            }
-            catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 Toast.makeText(this, "Wrong number format", Toast.LENGTH_SHORT).show();
             }
         }
@@ -149,27 +137,26 @@ public class CalculatorActivity extends AppCompatActivity implements AdapterView
         updatePlates(barbell_num, 12);
     }
 
-    private void prepareImages(){
-        for(ImageView imageView : PLATES_IMG){
-            if(imageView.getParent() != null) {
-                ((ViewGroup)imageView.getParent()).removeView(imageView);
+    private void prepareImages() {
+        for (ImageView imageView : PLATES_IMG) {
+            if (imageView.getParent() != null) {
+                ((ViewGroup) imageView.getParent()).removeView(imageView);
             }
         }
     }
 
-    private void updatePlates(double weight, int plate){
-        if(plate < 0) return;
+    private void updatePlates(double weight, int plate) {
+        if (plate < 0) return;
 
         double actualWeight = weight;
 
-        if(weight >=  PLATES[plate]){
-            actualWeight = weight-PLATES[plate];
+        if (weight >= PLATES[plate]) {
+            actualWeight = weight - PLATES[plate];
             scrollViewLinearlayout.addView(PLATES_IMG[plate]);
-        }
-        else {
+        } else {
             scrollViewLinearlayout.removeView(PLATES_IMG[plate]);
         }
 
-        updatePlates(actualWeight, plate-1);
+        updatePlates(actualWeight, plate - 1);
     }
 }

@@ -1,4 +1,4 @@
-package com.dm4nk.gymapp.domain;
+package com.dm4nk.gym_notes.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

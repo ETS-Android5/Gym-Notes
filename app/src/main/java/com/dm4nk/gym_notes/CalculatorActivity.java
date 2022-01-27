@@ -1,24 +1,38 @@
 package com.dm4nk.gym_notes;
 
+import static java.security.AccessController.getContext;
+
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.ParcelFormatException;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
+import java.util.zip.Inflater;
 
 public class CalculatorActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private static final Integer[] PATHS = {0, 5, 10, 15, 20, 25, 30};
-    private static final Double[] PLATES = {1.25, 2.5, 5., 10., 15., 20., 25.};
+    private static final Double[] PLATES = {1.25, 2.5, 5., 10., 15., 20., 25., 25., 25., 25., 25., 25., 25.};
     private static final double POUNDS_IN_KG = 2.205;
     private static final String FORMAT_1 = "%.1f";
     private static final String FORMAT_2 = "%.2f";
@@ -26,8 +40,10 @@ public class CalculatorActivity extends AppCompatActivity implements AdapterView
     private EditText input_weight_calculator;
     private TextView answer_pounds, answer_kilos, barbell_weight_1, dumbbell_weight;
     private int position = 0;
-    private ImageView one, two, five, ten, fifteen, twenty, twenty_five;
+    private ImageView one, two, five, ten, fifteen, twenty, twenty_five, twenty_five2, twenty_five3, twenty_five4, twenty_five5, twenty_five6, twenty_five7;
     private ImageView[] PLATES_IMG;
+
+    private LinearLayout scrollViewLinearlayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +64,18 @@ public class CalculatorActivity extends AppCompatActivity implements AdapterView
         fifteen = findViewById(R.id.fifteen);
         twenty = findViewById(R.id.twenty);
         twenty_five = findViewById(R.id.twenty_five);
+        twenty_five2 = findViewById(R.id.twenty_five2);
+        twenty_five3 = findViewById(R.id.twenty_five3);
+        twenty_five4 = findViewById(R.id.twenty_five4);
+        twenty_five5 = findViewById(R.id.twenty_five5);
+        twenty_five6 = findViewById(R.id.twenty_five6);
+        twenty_five7 = findViewById(R.id.twenty_five7);
 
-        PLATES_IMG = new ImageView[]{one, two, five, ten, fifteen, twenty, twenty_five};
-        makeAllPlatesInvisible();
+        PLATES_IMG = new ImageView[]{one, two, five, ten, fifteen, twenty, twenty_five, twenty_five2, twenty_five3, twenty_five4, twenty_five5, twenty_five6, twenty_five7};
+
+        scrollViewLinearlayout = (LinearLayout)findViewById(R.id.scroll_view_linear_layout);
+
+        prepareImages();
 
         ArrayAdapter<Integer> adapter = new ArrayAdapter<>(CalculatorActivity.this, android.R.layout.simple_spinner_dropdown_item, PATHS);
 
@@ -94,8 +119,13 @@ public class CalculatorActivity extends AppCompatActivity implements AdapterView
 
     private void prepareCalculation(int position) {
         if (!input_weight_calculator.getText().toString().trim().isEmpty()) {
-            double weight = Double.parseDouble(input_weight_calculator.getText().toString().trim());
-            calculate(PATHS[position], weight);
+            try {
+                double weight = Double.parseDouble(input_weight_calculator.getText().toString().trim());
+                calculate(PATHS[position], weight);
+            }
+            catch (NumberFormatException e){
+                Toast.makeText(this, "Wrong number format", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -115,12 +145,16 @@ public class CalculatorActivity extends AppCompatActivity implements AdapterView
         barbell_weight_1.setText(String.format(FORMAT_2, barbell_num));
         dumbbell_weight.setText(String.format(FORMAT_2, dumbbell_num));
 
-        updatePlates(barbell_num, 6);
+        prepareImages();
+        updatePlates(barbell_num, 12);
     }
 
-    private void makeAllPlatesInvisible(){
-        for(ImageView imageView : PLATES_IMG)
-            imageView.setVisibility(View.INVISIBLE);
+    private void prepareImages(){
+        for(ImageView imageView : PLATES_IMG){
+            if(imageView.getParent() != null) {
+                ((ViewGroup)imageView.getParent()).removeView(imageView);
+            }
+        }
     }
 
     private void updatePlates(double weight, int plate){
@@ -128,12 +162,12 @@ public class CalculatorActivity extends AppCompatActivity implements AdapterView
 
         double actualWeight = weight;
 
-        if(weight - PLATES[plate] >= 0){
-            PLATES_IMG[plate].setVisibility(View.VISIBLE);
+        if(weight >=  PLATES[plate]){
             actualWeight = weight-PLATES[plate];
+            scrollViewLinearlayout.addView(PLATES_IMG[plate]);
         }
         else {
-            PLATES_IMG[plate].setVisibility(View.INVISIBLE);
+            scrollViewLinearlayout.removeView(PLATES_IMG[plate]);
         }
 
         updatePlates(actualWeight, plate-1);

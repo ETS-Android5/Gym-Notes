@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class CalculatorActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private static final Integer[] PATHS = {5, 10, 15, 20, 25, 30};
+    private static final Integer[] PATHS = {0, 5, 10, 15, 20, 25, 30};
     private static final Double[] PLATES = {1.25, 2.5, 5., 10., 15., 20., 25.};
     private static final double POUNDS_IN_KG = 2.205;
     private static final String FORMAT_1 = "%.1f";
@@ -106,6 +106,9 @@ public class CalculatorActivity extends AppCompatActivity implements AdapterView
 
         double dumbbell_num = (Math.ceil(weight * ((100 - percent) / 100.) / 2.5)) * 1.25;
         double barbell_num = dumbbell_num - 10;
+
+        dumbbell_num = Math.max(dumbbell_num, 0);
+        barbell_num = Math.max(barbell_num, 0);
 
         answer_kilos.setText(String.format(FORMAT_1, kilos_num));
         answer_pounds.setText(String.format(FORMAT_1, pounds_num));

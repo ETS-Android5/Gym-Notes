@@ -16,7 +16,7 @@
     <string name="add_label">Добавить Упражнение</string>
     <string name="calculator_label">Калькулятор</string>
     <string name="pounds">фунты: </string>
-    <string name="kilos">килограммы: </string>
+    <string name="kilos">кило: </string>
     <string name="dumbbell">гантели: </string>
     <string name="barbell">штанга: </string>
 </resources>

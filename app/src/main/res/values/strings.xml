@@ -13,4 +13,10 @@
     <string name="add">Add</string>
     <string name="search">Search</string>
     <string name="add_label">Add Exercise</string>
+    <string name="calculator_label">Calculator</string>
+    <string name="pounds">pounds:</string>
+    <string name="kilos">kilos:</string>
+    <string name="_0" translatable="false">0</string>
+    <string name="dumbbell">dumbbell:</string>
+    <string name="barbell">barbell:</string>
 </resources>

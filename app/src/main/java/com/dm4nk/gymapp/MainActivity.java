@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private final ArrayList<Exercise> exerciseArrayList = new ArrayList<>();
     private RecyclerView recyclerView;
-    private FloatingActionButton add_button;
+    private FloatingActionButton add_button, calculate_button;
     private DatabaseHelper myDB;
     private CustomAdapter customAdapter;
 
@@ -37,6 +37,12 @@ public class MainActivity extends AppCompatActivity {
         add_button.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, AddActivity.class);
             startActivityForResult(intent, 1);
+        });
+
+        calculate_button = findViewById(R.id.calculate_button);
+        calculate_button.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, CalculatorActivity.class);
+            startActivityForResult(intent, 2);
         });
 
         myDB = new DatabaseHelper(MainActivity.this);

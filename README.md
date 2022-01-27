@@ -38,6 +38,6 @@ Track your weights and recheck videos
 Have you ever faced sittuations where you need to take away several percents of your weight? App calculator will help you with that and
 show, what plates you need
 
-<img src="https://user-images.githubusercontent.com/80630476/151311592-a62297bd-d225-4e16-bd64-581eebc0ee15.png" alt="calculator" style="width:250px;"/> <img src="https://user-images.githubusercontent.com/80630476/151311608-14921567-2f21-4f6c-b14a-9f0451c86e16.png" alt="calculator" style="width:250px;"/>
+<img src="https://user-images.githubusercontent.com/80630476/151446358-4234cb51-b3b7-4f24-b9dc-080b7102cbf0.png" alt="calculator" style="width:250px;"/> <img src="https://user-images.githubusercontent.com/80630476/151446336-3d27f757-f0bf-45f3-a39c-4306f624554a.png" alt="calculator" style="width:250px;"/>
 
 Download app [here](https://github.com/dm4nk/GymApp/blob/master/app/release/app-release.apk)

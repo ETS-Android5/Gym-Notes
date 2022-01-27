@@ -11,7 +11,7 @@ A simple App similar to notes to track your progress in gym!
 ### Both dark and light theme available
 It goes with english and russian language support, which will be applied automatically depending on your device language
 
-<img src="https://user-images.githubusercontent.com/80630476/149655748-f7b8be34-f5f3-458b-95f6-3685bba3f1a6.png" alt="main layout dark theme" style="width:250px;"/> <img src="https://user-images.githubusercontent.com/80630476/149655784-6e6eccf0-789a-4878-99a7-066a0930445d.png" alt="main layout light theme" style="width:250px;"/>
+<img src="https://user-images.githubusercontent.com/80630476/151311535-8a968d17-a115-421e-bd07-3cc9cb0a82c9.png" alt="main layout dark theme" style="width:250px;"/> <img src="https://user-images.githubusercontent.com/80630476/151311486-f0293008-b579-4b2d-aa6b-39d6bb313c3f.png" alt="main layout light theme" style="width:250px;"/>
 
 ### Add exercises to your list and date will be stored automatically
 Color indication will help track weight progress. If you haven't changed weight for 30 days, date will turn YELLOW, and after 
@@ -33,5 +33,11 @@ Also save useful videos and watch them later to remind yourself of technique
 Track your weights and recheck videos
 
 <img src="https://user-images.githubusercontent.com/80630476/149655832-4532ee15-d646-4ffc-8ff1-288f75f7d22a.png" alt="update delete new exercise" style="width:250px;"/>
+
+### Calculate your weight
+Have you ever faced sittuations where you need to take away several percents of your weight? App calculator will help you with that and
+show, what plates you need
+
+<img src="https://user-images.githubusercontent.com/80630476/151311592-a62297bd-d225-4e16-bd64-581eebc0ee15.png" alt="calculator" style="width:250px;"/> <img src="https://user-images.githubusercontent.com/80630476/151311608-14921567-2f21-4f6c-b14a-9f0451c86e16.png" alt="calculator" style="width:250px;"/>
 
 Download app [here](https://github.com/dm4nk/GymApp/blob/master/app/release/app-release.apk)

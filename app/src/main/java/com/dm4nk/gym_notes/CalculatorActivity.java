@@ -1,4 +1,4 @@
-package com.dm4nk.gymapp;
+package com.dm4nk.gym_notes;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -77,7 +77,7 @@ public class CalculatorActivity extends AppCompatActivity implements AdapterView
 
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
-            ab.setTitle(R.string.add_label);
+            ab.setTitle(R.string.calculator_label);
         }
     }
 

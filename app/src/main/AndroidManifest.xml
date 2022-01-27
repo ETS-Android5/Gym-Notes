@@ -19,6 +19,11 @@
             android:label="Add Exercise"
             android:parentActivityName="com.dm4nk.gym_notes.MainActivity" />
         <activity
+            android:name="com.dm4nk.gym_notes.CalculatorActivity"
+            android:exported="true"
+            android:label="Calculator"
+            android:parentActivityName="com.dm4nk.gym_notes.MainActivity" />
+        <activity
             android:name="com.dm4nk.gym_notes.MainActivity"
             android:exported="true"
             android:label="Gym Notes">
